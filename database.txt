@@ -1,0 +1,67 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+CREATE DATABASSE empdb CHARSET=utf8 COLLATE=utf8_unicode_ci;
+USE empdb;
+
+CREATE TABLE departments (
+  department_id int(11) NOT NULL,
+  department_name varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  location varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO departments (department_id, department_name, location) VALUES
+(2, 'IT', 'Tokyo'),
+(3, 'Admin', 'London'),
+(4, 'Sales', 'New Delhi'),
+(5, 'Marketing', 'Chittagong');
+
+CREATE TABLE employees (
+  employee_id int(11) NOT NULL,
+  employee_name varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  email varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  salary double NOT NULL,
+  department_id int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO employees (employee_id, employee_name, email, salary, department_id) VALUES
+(1, 'John', 'john@example.com', 3250, 3),
+(2, 'Sara', 'sara@example.com', 3375, 2),
+(3, 'Anne', 'anne@example.com', 3350, 4),
+(4, 'Bob', 'bob@example.com', 3250, 2),
+(5, 'Chloe', 'chloe@example.com', 3450, 2);
+
+CREATE TABLE users (
+  user_id int(11) NOT NULL,
+  username varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  password varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  type varchar(10) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO users (user_id, username, `password`, `type`) VALUES
+(1, 'admin', 'admin', 'Admin'),
+(2, 'user', 'user', 'User');
+
+
+ALTER TABLE departments
+  ADD PRIMARY KEY (department_id);
+
+ALTER TABLE employees
+  ADD PRIMARY KEY (employee_id);
+
+ALTER TABLE users
+  ADD PRIMARY KEY (user_id),
+  ADD UNIQUE KEY username (username);
+
+
+ALTER TABLE departments
+  MODIFY department_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+ALTER TABLE employees
+  MODIFY employee_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+ALTER TABLE users
+  MODIFY user_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
